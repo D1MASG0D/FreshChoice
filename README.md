@@ -35,7 +35,13 @@ The interface follows the Web Content Accessibility Guidelines (WCAG), so it wor
 
 ## Tech stack
 
-<!-- Fill in once decided, e.g. HTML, CSS, C#, SQL -->
+| Technology                              |
+| --------------------------------------- |
+| HTML                                    |
+| CSS + Bootstrap                         |
+| PHP                                     |
+| JavaScript                              |
+| MariaDB (MySQL-compatible) + phpMyAdmin |
 
 ## Team
 
