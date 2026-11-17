@@ -1,14 +1,14 @@
 # FreshChoice – Shift Management Web Application
 
-A web application that replaces the single Excel file FreshChoice uses to schedule staff across its three supermarkets. Managers plan rosters for all locations from one place; employees check their shifts, request days off, change their availability and pick up posted shifts from their phone.
+A web application that replaces the single Excel file FreshChoice uses to schedule staff across its three supermarkets. Managers plan rosters for all three locations from one place; employees check their shifts, request days off, change their availability and pick up posted shifts from their phone.
 
-This repository holds the documentation for the project and, as it is built, the application itself. It started as an ICT project at Fontys: four weeks of analysis, advice, design and implementation for a supermarket with one flagship store and two smaller neighbourhood shops.
+It is built as an ICT project at Fontys, following the full cycle of analysis, advice, design and implementation for a supermarket with one flagship store and two smaller neighbourhood shops.
 
 ## The problem
 
 The schedule for all three stores lives in one Excel file on one manager's computer. Staff see it as a printout, a photo in a group chat or a forwarded message. Days off, swaps and availability changes are asked for verbally, by WhatsApp or on paper.
 
-That produces five concrete problems, which the whole project is measured against:
+That produces five problems, which the whole project is measured against:
 
 1. Managers cannot see the shifts of employees in the other stores.
 2. Employees cannot request days off efficiently.
@@ -16,7 +16,7 @@ That produces five concrete problems, which the whole project is measured agains
 4. No efficient way to hand a shift over to another employee.
 5. No data on sickness and lateness.
 
-The as-is process, with those problems numbered on the flows:
+The current process, with those problems numbered on the flows:
 
 ![As-is shift management process](BPMN-as-is.png)
 
@@ -43,7 +43,7 @@ Twenty-one functional requirements, prioritised with MoSCoW: 7 Must, 7 Should, 6
 | FR-13 | Manager can manually change the schedule |
 | FR-14 | Manager can approve requests and availability changes |
 
-Out of scope for this release: the clock-in system (FR-21), payroll calculation, and automatic replacement suggestions. The full list with priorities is in [Analysis.md](Analysis.md), section 5.
+Out of scope for this release: the clock-in system (FR-21), payroll calculation, and automatic replacement suggestions. The Should items — day-off requests, shift posts, availability changes, chat, password reset — follow once the Must list works, and the Could items last.
 
 ## Technology
 
@@ -55,28 +55,13 @@ Out of scope for this release: the clock-in system (FR-21), payroll calculation,
 | Client-side | JavaScript: form feedback, AJAX, polling |
 | Data | MariaDB (MySQL-compatible), administered through phpMyAdmin |
 
-A classic LAMP-style stack: free, documented, no build step, and hostable by FreshChoice itself. The reasoning, the alternatives and the risks are in [TechnologyChoice.md](TechnologyChoice.md).
+A classic LAMP-style stack: free, documented, no build step, and hostable by FreshChoice itself. PHP renders the pages and enforces the rules before anything reaches the browser, and MariaDB keeps users, stores, shifts, requests and attendance in one place instead of three spreadsheets.
 
-## Documentation
-
-| File | What it covers |
-| --- | --- |
-| [Analysis.md](Analysis.md) | Context, stakeholders, root causes, competitors, technology, requirements, MoSCoW and scope |
-| [TechnologyChoice.md](TechnologyChoice.md) | Why this stack, what was rejected, how it covers the requirements |
-| [DataFlowAndAlgorithms.md](DataFlowAndAlgorithms.md) | Data flows and the eleven algorithms behind login, shifts, requests, chat, reset and reporting |
-| [DFD-level1.png](DFD-level1.png) | Level-1 data flow diagram: entities, five processes, nine data stores |
-| [BPMN-as-is.png](BPMN-as-is.png) | As-is process, with the five problems annotated |
-| Advice.pdf | The advice: three options compared, Solution C recommended, to-be process |
-| PossibleSolution.pdf | The three options in full, with the comparison matrix |
-| StakeholderAnalyses.pdf | Store management, supervisors, staff and customers |
-| RootCause.pdf | Five whys, four root causes, consequences |
-| CompetitorAnalyses.pdf | Dayforce, observed in a comparable two-location store |
-| Design.pdf | Design deliverables and who owns each one |
-| MoSCoW.pdf, SmartGoal.pdf, DotFramework.pdf, SDGs.pdf | Prioritisation, goals, research methods, sustainability |
+There is no WebSocket server, so chat and alerts are polled every few seconds. Delivery is near-real-time rather than instant, and the last fifty messages are rendered on page load so the conversation is always readable.
 
 ## Planned application structure
 
-Nothing is built in this repository yet. The agreed layout, so the code stays out of the web root except for what the browser needs:
+Nothing is built in this repository yet. The agreed layout keeps code out of the web root except for what the browser needs:
 
 ```
 FreshChoice/
@@ -105,11 +90,7 @@ The application is not in the repository yet, so there is nothing to run. When i
 
 ## Status
 
-- Analysis: complete.
-- Advice: complete, including the comparison of Excel, a dashboard and a custom application.
-- Design: data flow, processes and backend algorithms documented; wireframes, ERD and RBAC matrix still open.
+- Analysis: complete — problem, stakeholders, competitors, requirements and scope.
+- Advice: complete — Excel, a dashboard and a custom application compared, the custom application chosen.
+- Design: data flows, processes and the backend algorithms worked out; wireframes, ERD and the role matrix still open.
 - Implementation: not started.
-
-## Team
-
-Built by the FreshChoice project team. The work split for the analysis phase is recorded in [Analysis.md](Analysis.md), section 7.
