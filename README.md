@@ -80,17 +80,22 @@ FreshChoice/
 └── README.md
 ```
 
-## Running it locally
+## Database & Local Setup
 
-The application is not in the repository yet, so there is nothing to run. When it lands, it will need:
+The database schema (`database.sql`) and PDO connection (`config/db.php`) are now available in the repository. To run the database locally:
 
-1. Apache with PHP 8 and MariaDB — XAMPP, or any LAMP install.
-2. The project folder inside the web root, with `public/` as the document root.
-3. The schema imported through phpMyAdmin, and the credentials set in `config/db.php`.
+1. **Start XAMPP:** Open the XAMPP Control Panel and start **Apache** and **MySQL** (MariaDB).
+2. **Import the Schema:**
+   - Open `http://localhost/phpmyadmin` in your browser.
+   - Click **Import**, select `database.sql` from the root folder of this repository, and click **Import / Go**.
+   - This creates the `freshchoice_db` database with all 7 tables (`store`, `user`, `shift`, `request`, `availability`, `attendance`, `shift_post`) and sample test data (3 stores, 1 manager, 3 employees, sample shifts, and 1 open shift post).
+3. **Database Connection (`config/db.php`):**
+   - Configured for local XAMPP defaults (`host: localhost`, `dbname: freshchoice_db`, `user: root`, `password: ""`).
+   - Include it in backend PHP files using `require_once __DIR__ . '/../config/db.php';` to access the `$pdo` instance (configured with `ATTR_EMULATE_PREPARES => false` for prepared statement security).
 
 ## Status
+- **Analysis:** Complete — problem, stakeholders, competitors, requirements and scope.
+- **Advice:** Complete — Excel, a dashboard and a custom application compared, the custom application chosen.
+- **Design:** Data flows, processes, backend algorithms, ERD, and relational database schema complete; wireframes and role matrix in progress.
+- **Implementation:** Database schema (`database.sql`) and PDO connection (`config/db.php`) complete; application features in progress.
 
-- Analysis: complete — problem, stakeholders, competitors, requirements and scope.
-- Advice: complete — Excel, a dashboard and a custom application compared, the custom application chosen.
-- Design: data flows, processes and the backend algorithms worked out; wireframes, ERD and the role matrix still open.
-- Implementation: not started.
