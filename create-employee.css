@@ -1,0 +1,279 @@
+
+/* GENERAL SETTINGS */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #FFFFFF;
+    color: #28752B;
+}
+
+
+/* HEADER */
+
+.account-header {
+    width: 100%;
+    height: 112px;
+    background-color: #153F30;
+
+    display: flex;
+    align-items: center;
+
+    position: relative;
+}
+
+.account-header h1 {
+    color: #FFFFFF;
+    font-size: 36px;
+    font-weight: normal;
+
+    margin-left: 18%;
+}
+
+
+/* BACK BUTTON */
+
+.back-button {
+    position: absolute;
+    left: 6%;
+
+    color: #FFFFFF;
+    text-decoration: none;
+
+    font-size: 48px;
+    font-weight: normal;
+}
+
+
+/* MAIN CONTAINER */
+
+.account-container {
+    width: 84.7%;
+    max-width: 1200px;
+
+    margin-left: auto;
+
+    padding: 23px 40px 40px 32px;
+
+    border-left: 1px solid #B5D7AE;
+}
+
+
+/* SECTION HEADINGS */
+
+.account-container h2 {
+    font-size: 32px;
+    font-weight: normal;
+
+    margin-bottom: 22px;
+}
+
+
+/* PERSONAL INFORMATION */
+
+.personal-section {
+    border-bottom: 1px solid #B5D7AE;
+    padding-bottom: 22px;
+}
+
+.personal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    column-gap: 65px;
+    row-gap: 25px;
+}
+
+.form-group {
+    display: grid;
+    grid-template-columns: 125px 1fr;
+
+    align-items: center;
+    gap: 15px;
+}
+
+.form-group label,
+.employment-group label,
+.password-group label {
+    font-size: 22px;
+    font-weight: normal;
+}
+
+.form-group input,
+.employment-group input,
+.password-group input {
+    width: 100%;
+    height: 44px;
+
+    padding: 8px 10px;
+
+    background-color: #EAF6E6;
+    border: 1px solid #28752B;
+    border-radius: 0;
+
+    font-size: 18px;
+    color: #222222;
+}
+
+
+/* EMPLOYMENT INFORMATION */
+
+.employment-section {
+    padding: 19px 0;
+
+    border-bottom: 1px solid #B5D7AE;
+}
+
+.employment-section h2 {
+    margin-bottom: 10px;
+}
+
+.employment-group {
+    display: grid;
+    grid-template-columns: 175px 1fr;
+
+    align-items: center;
+    gap: 17px;
+
+    max-width: 610px;
+
+    margin-bottom: 16px;
+}
+
+.employment-group:last-child {
+    margin-bottom: 0;
+}
+
+
+/* PASSWORD */
+
+.password-section {
+    padding-top: 26px;
+}
+
+.password-group {
+    display: grid;
+    grid-template-columns: 175px 1fr;
+
+    align-items: center;
+    gap: 17px;
+
+    max-width: 700px;
+}
+
+
+/* SAVE BUTTON */
+
+.save-button {
+    display: block;
+
+    width: 270px;
+    height: 63px;
+
+    margin: 45px auto 0;
+
+    background-color: #28752B;
+    border: 1px solid #28752B;
+
+    color: #FFFFFF;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 28px;
+    font-weight: normal;
+
+    cursor: pointer;
+}
+
+
+/* FORM MESSAGE */
+
+.form-message {
+    text-align: center;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+.form-message.error {
+    color: #C62828;
+}
+
+.form-message.success {
+    color: #28752B;
+}
+
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 900px) {
+
+    .account-container {
+        width: 95%;
+        padding-right: 20px;
+    }
+
+    .personal-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .account-header h1 {
+        font-size: 28px;
+        margin-left: 18%;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .account-header {
+        height: 90px;
+    }
+
+    .account-header h1 {
+        font-size: 21px;
+        margin-left: 20%;
+    }
+
+    .back-button {
+        font-size: 38px;
+    }
+
+    .account-container {
+        width: 100%;
+        padding: 25px 20px;
+        border-left: none;
+    }
+
+    .account-container h2 {
+        font-size: 26px;
+    }
+
+    .form-group {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .employment-group,
+    .password-group {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .form-group label,
+    .employment-group label,
+    .password-group label {
+        font-size: 18px;
+    }
+
+    .save-button {
+        width: 100%;
+        max-width: 270px;
+    }
+
+}

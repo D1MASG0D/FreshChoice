@@ -1,0 +1,175 @@
+
+/* GENERAL SETTINGS */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #FFFFFF;
+    color: #28752B;
+}
+
+
+/* HEADER */
+
+.overview-header {
+    width: 100%;
+    height: 112px;
+    background-color: #153F30;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.overview-header h1 {
+    color: #FFFFFF;
+    font-size: 48px;
+    font-weight: normal;
+}
+
+
+/* NOTIFICATION BUTTON */
+
+.notification-button {
+    position: absolute;
+    right: 4%;
+    top: 7px;
+    width: 85px;
+    height: 85px;
+
+    border: 1px solid #FFFFFF;
+    border-radius: 50%;
+
+    background-color: transparent;
+    color: #FFFFFF;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+.bell-icon {
+    width: 42px;
+    height: 42px;
+}
+
+.notification-count {
+    position: absolute;
+    top: 13px;
+    right: 12px;
+
+    width: 26px;
+    height: 26px;
+
+    background-color: #EAF6E6;
+    color: #28752B;
+
+    border-radius: 50%;
+
+    font-size: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* OVERVIEW BUTTONS */
+
+.overview-container {
+    width: 86.7%;
+    max-width: 1200px;
+
+    margin: 142px auto;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    column-gap: 100px;
+    row-gap: 98px;
+}
+
+.overview-button {
+    width: 100%;
+    height: 112px;
+
+    background-color: #EAF6E6;
+    border: 1px solid #28752B;
+
+    color: #28752B;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 32px;
+    font-weight: normal;
+
+    text-decoration: none;
+    text-align: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 15px;
+}
+
+
+/* DISABLED BUTTONS */
+
+.overview-button:disabled {
+    opacity: 1;
+    cursor: not-allowed;
+}
+
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 700px) {
+
+    .overview-header {
+        height: 90px;
+    }
+
+    .overview-header h1 {
+        font-size: 32px;
+    }
+
+    .notification-button {
+        width: 60px;
+        height: 60px;
+        top: 15px;
+    }
+
+    .bell-icon {
+        width: 30px;
+        height: 30px;
+    }
+
+    .notification-count {
+        width: 21px;
+        height: 21px;
+        font-size: 13px;
+        top: 7px;
+        right: 7px;
+    }
+
+    .overview-container {
+        width: 85%;
+        margin: 60px auto;
+
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .overview-button {
+        height: 90px;
+        font-size: 24px;
+    }
+
+}

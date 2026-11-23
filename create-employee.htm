@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FreshChoice | Create Employee Account</title>
+
+    <link rel="stylesheet" href="create-employee.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="account-header">
+
+        <a href="../Manager Overview/overview.htm" class="back-button" aria-label="Back to overview">
+            &#8592;
+        </a>
+
+        <h1>Create employee account</h1>
+
+    </header>
+
+
+    <!-- ACCOUNT CREATION FORM -->
+    <main class="account-container">
+
+        <form id="employeeForm">
+
+            <!-- PERSONAL INFORMATION -->
+            <section class="personal-section">
+
+                <h2>Personal info:</h2>
+
+                <div class="personal-grid">
+
+                    <div class="form-group">
+                        <label for="firstName">First name:</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName">Last name:</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone number:</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- EMPLOYMENT INFORMATION -->
+            <section class="employment-section">
+
+                <h2>Employment info:</h2>
+
+                <div class="employment-group">
+
+                    <label for="employeeId">Employee ID:</label>
+                    <input type="text" id="employeeId" name="employeeId" required>
+
+                </div>
+
+                <div class="employment-group">
+
+                    <label for="store">Assigned store:</label>
+                    <input type="text" id="store" name="store" required>
+
+                </div>
+
+                <div class="employment-group">
+
+                    <label for="startDate">Start date:</label>
+                    <input type="date" id="startDate" name="startDate" required>
+
+                </div>
+
+            </section>
+
+
+            <!-- PASSWORD -->
+            <section class="password-section">
+
+                <div class="password-group">
+
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password"
+                           minlength="8" required>
+
+                </div>
+
+            </section>
+
+
+            <!-- FORM MESSAGE -->
+            <p id="formMessage" class="form-message"></p>
+
+
+            <!-- SAVE BUTTON -->
+            <button type="submit" class="save-button">
+                SAVE
+            </button>
+
+        </form>
+
+    </main>
+
+
+    <script src="create-employee.js"></script>
+
+</body>
+</html>
