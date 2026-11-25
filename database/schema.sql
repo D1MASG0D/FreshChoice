@@ -1,5 +1,19 @@
-CREATE DATABASE IF NOT EXISTS freshchoice_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+-- FreshChoice Database Schema (MariaDB / MySQL)
+CREATE DATABASE IF NOT EXISTS freshchoice_db
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
 USE freshchoice_db;
+
+SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS shift_post;
+DROP TABLE IF EXISTS attendance;
+DROP TABLE IF EXISTS availability;
+DROP TABLE IF EXISTS request;
+DROP TABLE IF EXISTS shift;
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS store;
+SET FOREIGN_KEY_CHECKS = 1;
 
 -- 1. STORE
 CREATE TABLE store (
@@ -16,6 +30,7 @@ CREATE TABLE user (
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
+    phone_number VARCHAR(20) NULL DEFAULT NULL,
     password_hash VARCHAR(255) NOT NULL,
     FOREIGN KEY (store_id) REFERENCES store(store_id) ON DELETE RESTRICT
 );
@@ -80,7 +95,7 @@ CREATE TABLE attendance (
     FOREIGN KEY (recorded_by) REFERENCES user(user_id) ON DELETE SET NULL
 );
 
--- 7. SHIFT_POST 
+-- 7. SHIFT_POST
 CREATE TABLE shift_post (
     post_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     shift_id INT UNSIGNED NULL UNIQUE,
@@ -99,38 +114,3 @@ CREATE TABLE shift_post (
     FOREIGN KEY (posted_by) REFERENCES user(user_id) ON DELETE CASCADE,
     FOREIGN KEY (claimed_by) REFERENCES user(user_id) ON DELETE SET NULL
 );
-
--- ==========================================
--- test password and username 
--- ==========================================
-
-INSERT INTO store (name, address) VALUES
-('FreshChoice Flagship', 'Marktstraat 12, Eindhoven'),
-('FreshChoice Noord', 'Woenselse Markt 45, Eindhoven'),
-('FreshChoice Zuid', 'Stratumsedijk 88, Eindhoven');
-
-INSERT INTO user (store_id, role, first_name, last_name, email, password_hash) VALUES
-(1, 'manager', 'Emma', 'de Vries', 'emma.manager@freshchoice.nl', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'),
-(1, 'employee', 'Lucas', 'Bakker', 'lucas@freshchoice.nl', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'),
-(2, 'employee', 'Sophie', 'Jansen', 'sophie@freshchoice.nl', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'),
-(3, 'employee', 'Noah', 'Visser', 'noah@freshchoice.nl', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi');
-
-INSERT INTO shift (store_id, user_id, shift_date, start_time, end_time) VALUES
-(1, 2, '2026-11-23', '08:00:00', '16:00:00'),
-(2, 3, '2026-11-23', '12:00:00', '20:00:00'),
-(3, 4, '2026-11-24', '09:00:00', '17:00:00');
-
-INSERT INTO request (user_id, start_date, end_date, reason, status) VALUES
-(2, '2026-12-01', '2026-12-03', 'Family trip', 'pending');
-
-INSERT INTO availability (user_id, weekday, start_time, end_time, status, reviewed_by) VALUES
-(2, 1, '08:00:00', '18:00:00', 'approved', 1),
-(3, 3, '12:00:00', '21:00:00', 'approved', 1);
-
-INSERT INTO attendance (user_id, attendance_date, type, minutes_late, recorded_by) VALUES
-(2, '2026-11-18', 'present', 0, 1),
-(3, '2026-11-18', 'late', 15, 1);
-
-
-INSERT INTO shift_post (shift_id, store_id, shift_date, start_time, end_time, posted_by, claimed_by, status) VALUES
-(NULL, 1, '2026-11-25', '14:00:00', '21:00:00', 1, NULL, 'open');
