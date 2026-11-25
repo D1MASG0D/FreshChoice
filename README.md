@@ -80,22 +80,23 @@ FreshChoice/
 └── README.md
 ```
 
-## Database & Local Setup
+## Database Setup (MariaDB / phpMyAdmin)
 
-The database schema (`database.sql`) and PDO connection (`config/db.php`) are now available in the repository. To run the database locally:
+1. Start **Apache** and **MySQL** in the XAMPP Control Panel.
+2. Open **phpMyAdmin** (`http://localhost/phpmyadmin`).
+3. Import **`database/schema.sql`** first to create the `freshchoice_db` database and all 7 tables (`store`, `user`, `shift`, `request`, `availability`, `attendance`, `shift_post`).
+4. Select `freshchoice_db` in the left sidebar and import **`database/seed.sql`** to populate the 3 Eindhoven stores, 20 test accounts, and sample schedules.
+5. Verify that `db.php` points to `dbname=freshchoice_db` (default XAMPP credentials: user `root`, empty password `""`).
 
-1. **Start XAMPP:** Open the XAMPP Control Panel and start **Apache** and **MySQL** (MariaDB).
-2. **Import the Schema:**
-   - Open `http://localhost/phpmyadmin` in your browser.
-   - Click **Import**, select `database.sql` from the root folder of this repository, and click **Import / Go**.
-   - This creates the `freshchoice_db` database with all 7 tables (`store`, `user`, `shift`, `request`, `availability`, `attendance`, `shift_post`) and sample test data (3 stores, 1 manager, 3 employees, sample shifts, and 1 open shift post).
-3. **Database Connection (`config/db.php`):**
-   - Configured for local XAMPP defaults (`host: localhost`, `dbname: freshchoice_db`, `user: root`, `password: ""`).
-   - Include it in backend PHP files using `require_once __DIR__ . '/../config/db.php';` to access the `$pdo` instance (configured with `ATTR_EMULATE_PREPARES => false` for prepared statement security).
+### Test Credentials
+All 20 seeded accounts share the password: **`Password123!`**
 
-## Status
-- **Analysis:** Complete — problem, stakeholders, competitors, requirements and scope.
-- **Advice:** Complete — Excel, a dashboard and a custom application compared, the custom application chosen.
-- **Design:** Data flows, processes, backend algorithms, ERD, and relational database schema complete; wireframes and role matrix in progress.
-- **Implementation:** Database schema (`database.sql`) and PDO connection (`config/db.php`) complete; application features in progress.
+| Role | Name | Store | Email |
+| :--- | :--- | :--- | :--- |
+| Manager | Emma de Vries | FreshChoice Flagship | `emma.manager@freshchoice.nl` |
+| Manager | Liam van Dijk | FreshChoice Noord | `liam.manager@freshchoice.nl` |
+| Manager | Mila Smit | FreshChoice Zuid | `mila.manager@freshchoice.nl` |
+| Employee | Lucas Bakker | FreshChoice Flagship | `lucas@freshchoice.nl` |
+| Employee | Sophie Jansen | FreshChoice Noord | `sophie@freshchoice.nl` |
+| Employee | Noah Visser | FreshChoice Zuid | `noah@freshchoice.nl` |
 
