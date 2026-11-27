@@ -16,7 +16,7 @@ final class UserModel
     public static function findById(PDO $pdo, int $id): ?array
     {
         $st = $pdo->prepare(
-            'SELECT user_id, store_id, role, first_name, last_name, email FROM user WHERE user_id = ?'
+            'SELECT user_id, store_id, role, first_name, last_name, email, phone_number FROM user WHERE user_id = ?'
         );
         $st->execute([$id]);
         return $st->fetch() ?: null;
@@ -38,13 +38,14 @@ final class UserModel
         string $firstName,
         string $lastName,
         string $email,
+        ?string $phone,
         string $passwordHash
     ): int {
         $st = $pdo->prepare(
-            'INSERT INTO user (store_id, role, first_name, last_name, email, password_hash)
-             VALUES (?, ?, ?, ?, ?, ?)'
+            'INSERT INTO user (store_id, role, first_name, last_name, email, phone_number, password_hash)
+             VALUES (?, ?, ?, ?, ?, ?, ?)'
         );
-        $st->execute([$storeId, $role, $firstName, $lastName, $email, $passwordHash]);
+        $st->execute([$storeId, $role, $firstName, $lastName, $email, $phone, $passwordHash]);
         return (int) $pdo->lastInsertId();
     }
 
@@ -59,7 +60,7 @@ final class UserModel
     public static function listAll(PDO $pdo): array
     {
         return $pdo->query(
-            'SELECT u.user_id, u.first_name, u.last_name, u.email, u.role, u.store_id, s.name AS store_name
+            'SELECT u.user_id, u.first_name, u.last_name, u.email, u.phone_number, u.role, u.store_id, s.name AS store_name
              FROM user u JOIN store s ON s.store_id = u.store_id
              ORDER BY s.store_id, u.role, u.last_name, u.first_name'
         )->fetchAll();
