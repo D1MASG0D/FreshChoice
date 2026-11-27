@@ -30,8 +30,8 @@ class AuthService
         }
 
         $stmt = $this->pdo->prepare(
-            'SELECT user_id, store_id, role, first_name, last_name, email, password_hash
-             FROM user
+            'SELECT id, store_id, role, first_name, last_name, email, password_hash
+             FROM users
              WHERE email = :email
              LIMIT 1'
         );
@@ -45,19 +45,20 @@ class AuthService
 
         if (AccessControl::needsRehash($user['password_hash'])) {
             $newHash = AccessControl::hashPassword($password);
-            $updateStmt = $this->pdo->prepare('UPDATE user SET password_hash = :hash WHERE user_id = :id');
+            $updateStmt = $this->pdo->prepare('UPDATE users SET password_hash = :hash WHERE id = :id');
             $updateStmt->execute([
                 ':hash' => $newHash,
-                ':id'   => $user['user_id'],
+                ':id'   => $user['id'],
             ]);
         }
 
         $this->clearFailedAttempts();
         Security::regenerateSession();
 
-        $_SESSION['user_id']    = (int)$user['user_id'];
+        $_SESSION['user_id']    = (int)$user['id'];
         $_SESSION['store_id']   = (int)$user['store_id'];
         $_SESSION['role']       = $user['role'];
+        $_SESSION['name']       = $user['first_name'] . ' ' . $user['last_name'];
         $_SESSION['first_name'] = $user['first_name'];
         $_SESSION['last_name']  = $user['last_name'];
 
