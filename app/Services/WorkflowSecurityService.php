@@ -75,9 +75,9 @@ class WorkflowSecurityService
 
         $stmt = $this->pdo->prepare(
             'SELECT u.store_id
-             FROM request r
-             INNER JOIN user u ON r.user_id = u.user_id
-             WHERE r.request_id = :request_id
+             FROM requests r
+             INNER JOIN users u ON r.user_id = u.id
+             WHERE r.id = :request_id
              LIMIT 1'
         );
         $stmt->execute([':request_id' => $requestId]);
@@ -98,9 +98,9 @@ class WorkflowSecurityService
 
         $stmt = $this->pdo->prepare(
             'SELECT u.store_id
-             FROM availability a
-             INNER JOIN user u ON a.user_id = u.user_id
-             WHERE a.availability_id = :availability_id
+             FROM availabilities a
+             INNER JOIN users u ON a.user_id = u.id
+             WHERE a.id = :availability_id
              LIMIT 1'
         );
         $stmt->execute([':availability_id' => $availabilityId]);
@@ -119,7 +119,7 @@ class WorkflowSecurityService
             return false;
         }
 
-        $stmt = $this->pdo->prepare('SELECT user_id, store_id FROM shift WHERE shift_id = :shift_id LIMIT 1');
+        $stmt = $this->pdo->prepare('SELECT user_id, store_id FROM shifts WHERE id = :shift_id LIMIT 1');
         $stmt->execute([':shift_id' => $shiftId]);
         $shift = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -142,9 +142,10 @@ class WorkflowSecurityService
         }
 
         $stmt = $this->pdo->prepare(
-            'SELECT store_id, posted_by, status
-             FROM shift_post
-             WHERE post_id = :post_id
+            'SELECT s.store_id, sp.posted_by_user_id, sp.status
+             FROM shift_posts sp
+             INNER JOIN shifts s ON sp.shift_id = s.id
+             WHERE sp.id = :post_id
              LIMIT 1'
         );
         $stmt->execute([':post_id' => $postId]);
@@ -154,7 +155,7 @@ class WorkflowSecurityService
             return false;
         }
 
-        if ((int)$post['posted_by'] === AccessControl::currentUserId()) {
+        if ((int)$post['posted_by_user_id'] === AccessControl::currentUserId()) {
             return false;
         }
 
