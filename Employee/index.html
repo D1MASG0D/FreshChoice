@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FreshChoice Employee</title>
+
+    <!-- Connects the CSS and icons -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+</head>
+
+<body>
+
+    <div class="phone dashboard">
+
+        <header class="dashboard-header">
+
+            <div class="top-bar">
+
+                <!-- Hamburger menu -->
+                <button class="icon-button" onclick="openMenu()" aria-label="Open menu">
+                    <i class="bi bi-list"></i>
+                </button>
+
+                <div class="brand">
+                    <h1>FreshChoice</h1>
+                    <p>Employee</p>
+                </div>
+
+                <!-- Notification bell with a red dot -->
+                <a href="shift-alerts.html"
+                   class="icon-button notification-bell"
+                   aria-label="Notifications">
+
+                    <i class="bi bi-bell"></i>
+
+                    <span id="bellDot" hidden></span>
+
+                </a>
+
+            </div>
+
+            <div class="dashboard-profile">
+
+                <div class="profile-icon">
+                    <i class="bi bi-people-fill"></i>
+                </div>
+
+                <h3>Emma Clark</h3>
+
+            </div>
+
+        </header>
+
+        <main class="dashboard-main">
+
+            <div class="navigation">
+
+                <a href="schedule.html">
+                    <i class="bi bi-calendar-week"></i>
+                    My Schedule
+                    <i class="bi bi-chevron-right"></i>
+                </a>
+
+                <!-- Disabled buttons are not connected yet -->
+                <button disabled>
+                    <i class="bi bi-calendar-plus"></i>
+                    Request a day off
+                    <i class="bi bi-chevron-right"></i>
+                </button>
+
+                <button disabled>
+                    <i class="bi bi-clock"></i>
+                    Available
+                    <i class="bi bi-chevron-right"></i>
+                </button>
+
+            </div>
+
+            <button class="logout" onclick="logout()">
+                <i class="bi bi-box-arrow-right"></i>
+                Logout
+            </button>
+
+        </main>
+
+        <!-- Dark background behind the menu -->
+        <div id="overlay" onclick="closeMenu()"></div>
+
+        <aside id="sideMenu">
+
+            <header class="menu-header">
+
+                <h1>FreshChoice</h1>
+
+                <button class="icon-button" onclick="closeMenu()" aria-label="Close menu">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+
+            </header>
+
+            <div class="menu-profile">
+
+                <div class="large-avatar">
+                    <i class="bi bi-person"></i>
+                </div>
+
+                <h3>Emma Clark</h3>
+                <p>Employee</p>
+
+            </div>
+
+            <button class="menu-link" disabled>
+                <i class="bi bi-person"></i>
+                Personal Information
+                <i class="bi bi-chevron-right"></i>
+            </button>
+
+            <button class="menu-link red" onclick="logout()">
+                <i class="bi bi-box-arrow-right"></i>
+                Log Out
+            </button>
+
+        </aside>
+
+    </div>
+
+    <!-- Connects the JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+</html>

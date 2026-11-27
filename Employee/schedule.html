@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Schedule</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+</head>
+
+<body>
+
+    <div class="phone">
+
+        <header>
+
+            <div class="page-heading">
+
+                <a href="index.html" aria-label="Back to dashboard">
+                    <i class="bi bi-arrow-left"></i>
+                </a>
+
+                <h1>My Schedule</h1>
+
+            </div>
+
+            <div class="employee">
+
+                <div class="avatar">
+                    <i class="bi bi-person"></i>
+                </div>
+
+                <div>
+                    <strong>Emma Clark</strong>
+                    <p>My weekly shifts</p>
+                </div>
+
+            </div>
+
+        </header>
+
+        <main class="page-content">
+
+            <!-- Selects the previous or next week -->
+            <div class="week">
+
+                <button id="previousButton"
+                        onclick="previousWeek()"
+                        aria-label="Previous week">
+
+                    <i class="bi bi-chevron-left"></i>
+
+                </button>
+
+                <strong id="weekDate">
+                    7–13 December 2026
+                </strong>
+
+                <button id="nextButton"
+                        onclick="nextWeek()"
+                        aria-label="Next week">
+
+                    <i class="bi bi-chevron-right"></i>
+
+                </button>
+
+            </div>
+
+            <!-- Weekly shifts -->
+            <div id="weeklyShifts">
+
+                <div class="shift">
+
+                    <div class="shift-time">
+
+                        <strong>
+                            <i class="bi bi-calendar-week"></i>
+                            Monday
+                        </strong>
+
+                        <strong>09:00–17:00</strong>
+
+                    </div>
+
+                    <span class="status">• Scheduled</span>
+
+                </div>
+
+                <div class="shift">
+
+                    <div class="shift-time">
+
+                        <strong>
+                            <i class="bi bi-calendar-week"></i>
+                            Wednesday
+                        </strong>
+
+                        <strong>12:00–20:00</strong>
+
+                    </div>
+
+                    <span class="status">• Scheduled</span>
+
+                </div>
+
+                <!-- This shift changes when a request is accepted -->
+                <div class="shift">
+
+                    <div class="shift-time">
+
+                        <strong>
+                            <i class="bi bi-calendar-week"></i>
+                            <span id="shiftDay">Friday</span>
+                        </strong>
+
+                        <strong id="shiftTime">
+                            09:00–17:00
+                        </strong>
+
+                    </div>
+
+                    <span class="status">• Scheduled</span>
+
+                </div>
+
+            </div>
+
+            <p id="emptyWeek" hidden>
+                No shifts scheduled for this week.
+            </p>
+
+            <div class="total">
+
+                <span>Total Scheduled Hours:</span>
+
+                <strong id="totalHours">
+                    24 hours
+                </strong>
+
+            </div>
+
+        </main>
+
+        <!-- Bottom navigation -->
+        <footer>
+
+            <a href="index.html">
+                <i class="bi bi-house-door"></i>
+                Home
+            </a>
+
+            <a href="schedule.html" class="active">
+                <i class="bi bi-calendar-week"></i>
+                Schedule
+            </a>
+
+            <button disabled>
+                <i class="bi bi-file-earmark-plus"></i>
+                Request
+            </button>
+
+            <button disabled>
+                <i class="bi bi-person"></i>
+                Account
+            </button>
+
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
