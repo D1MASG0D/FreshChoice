@@ -116,6 +116,8 @@ final class ManagerController
         $first   = $str('first_name');
         $last    = $str('last_name');
         $email   = strtolower($str('email'));
+        $phone   = $str('phone_number');
+        $phone   = $phone === '' ? null : $phone;
         $role    = $str('role');
         $storeId = filter_var($_POST['store_id'] ?? null, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]);
         $pass    = is_string($_POST['password'] ?? null) ? $_POST['password'] : '';
@@ -125,6 +127,9 @@ final class ManagerController
         if ($last === ''  || mb_strlen($last) > 50)  { $errors[] = 'Last name is required (max 50 characters).'; }
         if (!filter_var($email, FILTER_VALIDATE_EMAIL) || mb_strlen($email) > 100) {
             $errors[] = 'Enter a valid email address (max 100 characters).';
+        }
+        if ($phone !== null && !preg_match('/^\+?[0-9 \-]{6,20}$/', $phone)) {
+            $errors[] = 'Enter a valid phone number (digits, spaces, dashes, optional +; max 20).';
         }
         if (!in_array($role, ['employee', 'manager'], true)) { $errors[] = 'Choose a role.'; }
         if ($storeId === false || !StoreModel::exists($pdo, $storeId)) { $errors[] = 'Choose a store.'; }
@@ -136,7 +141,7 @@ final class ManagerController
 
         if (!$errors) {
             try {
-                UserModel::create($pdo, $storeId, $role, $first, $last, $email, password_hash($pass, PASSWORD_DEFAULT));
+                UserModel::create($pdo, $storeId, $role, $first, $last, $email, $phone, password_hash($pass, PASSWORD_DEFAULT));
             } catch (PDOException $e) {
 
                 if ($e->getCode() === '23000') {
@@ -151,7 +156,7 @@ final class ManagerController
         if ($errors) {
             foreach ($errors as $e) { flash('error', $e); }
 
-            $_SESSION['old'] = compact('first', 'last', 'email', 'role') + ['store_id' => $storeId];
+            $_SESSION['old'] = compact('first', 'last', 'email', 'phone', 'role') + ['store_id' => $storeId];
             redirect('manager-accounts');
         }
 
