@@ -1,0 +1,12 @@
+# Send every request that is not a real file to index.php.
+# Real files such as css/app.css are still served normally.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [QSA,L]
+</IfModule>
+
+# Do not list folders, and do not show dotfiles.
+Options -Indexes
