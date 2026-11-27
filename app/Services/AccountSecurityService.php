@@ -14,9 +14,9 @@ class AccountSecurityService
     public function getSafeUserProfile(int $targetUserId): ?array
     {
         $stmt = $this->pdo->prepare(
-            'SELECT user_id, store_id, role, first_name, last_name, email
-             FROM user
-             WHERE user_id = :id
+            'SELECT id, store_id, role, first_name, last_name, email
+             FROM users
+             WHERE id = :id
              LIMIT 1'
         );
         $stmt->execute([':id' => $targetUserId]);
@@ -27,7 +27,7 @@ class AccountSecurityService
         }
 
         AccessControl::requireUserAccountAccess(
-            (int)$user['user_id'],
+            (int)$user['id'],
             (int)$user['store_id']
         );
 
@@ -64,7 +64,7 @@ class AccountSecurityService
             return ['success' => false, 'error' => $strength['error']];
         }
 
-        $stmt = $this->pdo->prepare('SELECT password_hash FROM user WHERE user_id = :id LIMIT 1');
+        $stmt = $this->pdo->prepare('SELECT password_hash FROM users WHERE id = :id LIMIT 1');
         $stmt->execute([':id' => $targetUserId]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -73,7 +73,7 @@ class AccountSecurityService
         }
 
         $newHash = AccessControl::hashPassword($newPassword);
-        $update = $this->pdo->prepare('UPDATE user SET password_hash = :hash WHERE user_id = :id');
+        $update = $this->pdo->prepare('UPDATE users SET password_hash = :hash WHERE id = :id');
         $update->execute([
             ':hash' => $newHash,
             ':id'   => $targetUserId,
@@ -106,7 +106,7 @@ class AccountSecurityService
         }
 
         $newHash = AccessControl::hashPassword($temporaryPassword);
-        $update = $this->pdo->prepare('UPDATE user SET password_hash = :hash WHERE user_id = :id');
+        $update = $this->pdo->prepare('UPDATE users SET password_hash = :hash WHERE id = :id');
         $update->execute([
             ':hash' => $newHash,
             ':id'   => $targetUserId,
